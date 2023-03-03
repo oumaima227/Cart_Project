@@ -1,0 +1,223 @@
+﻿@model IEnumerable<AchatEnLigne.Models.Produit>
+@{
+    ViewData["Title"] = "Bienvenue !";
+}
+
+
+
+
+
+
+
+
+
+<div class="jumbotron">
+    <div class="container text-center text-lg-left">
+
+        <div class="row">
+            <div class="col-lg-8">
+                <h1 class="display-4">
+                    Bienvenue Chez  <span class="highlight-word">Maro Store !</span>
+                </h1>
+                <p class="lead">Quand vous finissez de remplir votre panier , vous pouvez simplement cliquer Ici pour passer votre commande !</p>
+                <span class="text-center d-inline-block">
+                    <a asp-action="Index" asp-controller="Paniers" class="btn btn-warning btn-lg w-100" style="background:#4db8ff" role="button">Sans Frais de Livraison! </a>
+                    <p class="text-muted">Paiment Cash On Delivery</p>
+                </span>
+
+            </div>
+            <div class="col-lg-4 align-items-center d-flex">
+                <img src="https://png.pngtree.com/png-vector/20220525/ourmid/pngtree-woman-shop-online-store-png-image_4742532.png" alt="" class="img-fluid">
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="p-5 text-center bg-image rounded-3" style="
+    background-image: url('https://img.freepik.com/premium-photo/shopping-online-home-concept-blue-background-copyspace_1205-6303.jpg?w=2000');
+    height: 400px;
+  ">
+    <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);width: 100%;
+    height: 100%;">
+        <div class="d-flex justify-content-center align-items-center h-100">
+            <div class="text-white">
+                <h1 class="mb-3">Notre Selection de Produits</h1>
+                <h4 class="mb-3">Nous avons des produits de trés hautes gammes et different catégories</h4>
+                <a class="btn btn-outline-light btn-lg" href="#!" role="button">Au Shopping!</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+<section >
+    <div class=" text-center container ">
+
+
+        <div class="row m-2">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-12 mb-3">
+                    <div class="card" style="box-shadow: 8px 0px 20px 0px #8c9cac;border-radius: 20px;border:0px">
+
+                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                         data-mdb-ripple-color="light">
+                            <img src=@item.URL alt="" style="height: 310px;width: 100%;    border-radius: 20px;" />
+
+                            <a href="#!">
+                                <div class="mask">
+                                    <div class="d-flex justify-content-start align-items-end h-100">
+                                        <h5><span class="badge bg-warning ms-2">New</span></h5>
+                                    </div>
+                                </div>
+                                <div class="hover-overlay">
+                                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card-body">
+                            <a href="" class="text-reset">
+                                <h5 class="card-title mb-3">@Html.DisplayFor(modelItem => item.Title)</h5>
+                            </a>
+                            <a href="" class="text-reset">
+                                <p>@Html.DisplayFor(modelItem => item.Genre)</p>
+                            </a>
+                            <h6 class="mb-3">@Html.DisplayFor(modelItem => item.Price) Dh</h6>
+                            <h6 class="mb-3">@Html.DisplayFor(modelItem => item.Stock) : Stock</h6>
+                            <form asp-route-id="@item.Id" method="get" asp-action="AddPanier">
+                                <div class="d-flex" style="justify-content:center;align-items:center">
+
+                                    <input style="width: 5rem; margin-right:1rem" asp type="number" name="Quantité" placeholder="Quantité" value="1" min="0" max="@item.Stock">
+                                    <button style="background:#4db8ff" class="btn btn-warning btn-block">Ajouter au panier</button>
+
+                                </div>
+                            </form>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            }
+        </div>
+
+
+
+    </div>
+</section>
+<hr class="hr" />
+<div class='container-fluid mx-auto mt-5 mb-5 col-12' style="text-align: center">
+    <div class="hd"><h1>Pourquoi Maro Store ?</h1></div>
+    <p><small class="text-muted">Nous vous delivrons toujours plus que ce qui est <br />attendu de vous , peut importe la demande.</small></p>
+    <div class="row" style="justify-content: center">
+        <div class="card col-md-3 col-12">
+            <div class="card-content">
+                <div class="card-body"> <img class="img"  src="https://i.imgur.com/S7FJza5.png" />
+                    <div class="shadow"></div>
+                    <div class="card-title"><h5> Livraison Gratuite </h5></div>
+                    <div class="card-subtitle">
+                        <p> <small class="text-muted">Nous avons des Hangars dispersé dans tout le monde, afin de fournir le service de livraison le plus rapide au monde !</small> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card col-md-3 col-12 ml-2">
+            <div class="card-content">
+                <div class="card-body"> <img class="img" src="https://i.imgur.com/xUWJuHB.png" />
+                    <div class="card-title"><h5> A l'écoute </h5></div>
+                    <div class="card-subtitle">
+                        <p> <small class="text-muted">Nous somme disponible h24 7j/7 afin que chacun de nos clients soit satisfait.</small> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card col-md-3 col-12 ml-2">
+            <div class="card-content">
+                <div class="card-body"> <img class="img rck" src="https://i.imgur.com/rG3CGn3.png" style="height:100px;width:100px"/>
+                    <div class="card-title"><h5>Votre bien étre est notre priorité</h5></div>
+                    <div class="card-subtitle">
+                        <p> <small class="text-muted">Nos produits sont delicatements choisis afins qu'ils ai le status des meilleurs produit par rapport a la qualité/prix.</small> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Carousel wrapper -->
+
+    <!-- Controls -->
+  
+    <!-- Inner -->
+<div class="carousel-inner py-4" style="background-color:#4db8ff">
+        <!-- Single item -->
+        <div class="carousel-item active">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <img class="rounded-circle shadow-1-strong mb-4"
+                         src="https://1000logos.net/wp-content/uploads/2022/02/Jumia-Logo.png" alt="avatar"
+                             style="width: 150px;" />
+                        <h5 class="mb-3">Jumia</h5>
+                        <p>Collaborateur</p>
+                        <p class="text-muted">
+                            <i class="fas fa-quote-left pe-2"></i>
+                        Visiter aussi notre collaborateur
+                        </p>
+                        <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
+                            <li><i class="fas fa-star fa-sm"></i></li>
+                            <li><i class="fas fa-star fa-sm"></i></li>
+                            <li><i class="fas fa-star fa-sm"></i></li>
+                            <li><i class="fas fa-star fa-sm"></i></li>
+                            <li><i class="fas fa-star fa-sm"></i></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 d-none d-lg-block">
+                        <img class="rounded-circle shadow-1-strong mb-4"
+                         src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Amazon_icon.svg/2048px-Amazon_icon.svg.png" alt="avatar"
+                             style="width: 150px;" />
+                        <h5 class="mb-3">Amazon</h5>
+                        <p>Collborateur</p>
+                        <p class="text-muted">
+                            <i class="fas fa-quote-left pe-2"></i>
+                        Visiter aussi notre collaborateur
+                        </p>
+                        <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
+                            <li><i class="fas fa-star fa-sm"></i></li>
+                            <li><i class="fas fa-star fa-sm"></i></li>
+                            <li><i class="fas fa-star fa-sm"></i></li>
+                            <li><i class="fas fa-star fa-sm"></i></li>
+                            <li>
+                                <i class="fas fa-star-half-alt fa-sm"></i>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-4 d-none d-lg-block">
+                        <img class="rounded-circle shadow-1-strong mb-4"
+                         src="https://download.logo.wine/logo/AliExpress/AliExpress-Logo.wine.png" alt="avatar"
+                             style="width: 150px;" />
+                        <h5 class="mb-3">Ali Express</h5>
+                    <p>Collaborateur</p>
+                        <p class="text-muted">
+                            <i class="fas fa-quote-left pe-2"></i>
+                        Visiter aussi notre collaborateur
+                    </p>
+                        <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
+                            <li><i class="fas fa-star fa-sm"></i></li>
+                            <li><i class="fas fa-star fa-sm"></i></li>
+                            <li><i class="fas fa-star fa-sm"></i></li>
+                            <li><i class="fas fa-star fa-sm"></i></li>
+                            <li><i class="far fa-star fa-sm"></i></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    
+    </div>
+    
+</div>

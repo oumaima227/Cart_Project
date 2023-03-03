@@ -1,0 +1,120 @@
+﻿@model IEnumerable<AchatEnLigne.Models.LignePanierCommande>
+
+@{
+    ViewData["Title"] = "Index";
+    var données = ViewBag.Produit;
+    var panier = ViewBag.panier;
+    var commandes = ViewBag.commandes;
+    List<int> blackmmande = new();
+    List<Commande> y = new();
+    List<int> Verification = new();
+}
+
+
+
+          @foreach (var tmp in commandes)
+        {
+            
+            y.Add(tmp);
+        }
+        
+       
+       @foreach (var item in Model)
+{
+    
+           
+            @if (!Verification.Contains(item.CommandeX))
+            {
+                <section class="h-100 h-custom" style="background-color: #eee;">
+                    <div class="container py-5 h-100">
+                        <div class="row d-flex justify-content-center align-items-center h-100">
+                            <div class="col-lg-8 col-xl-6">
+                                <div class="card border-top border-bottom border-3" style="border-color: black !important;">
+                                    <div class="card-body p-5">
+
+                                        <p class="lead fw-bold mb-5" style="color: black;">Recu d'achat</p>
+                                <div class="row">
+                                    <div class="col mb-3">
+                                        <p class="small text-muted mb-1">Date</p>
+                                        @foreach (var i in commandes)
+                                        {
+                                            if (i.NumCommande == item.CommandeX)
+                                            {
+                                                <p>@i.DateTime</p>
+                                                break;
+                                            }
+                                        }
+
+                                    </div>
+                                    <div class="col mb-3">
+                                        <p class="small text-muted mb-1">Order No.</p>
+                                        <p> @Html.DisplayFor(modelItem => item.CommandeX)</p>
+
+                                    </div>
+                                </div>   <div class="row">
+                                    <div class="col mb-3">
+                                        <p class="small text-muted mb-1">UserId</p>
+                                        <p> @Html.DisplayFor(modelItem => item.UserX)</p>
+
+                                    </div>
+                                    <div class="col mb-3">
+                                        <p class="small text-muted mb-1">Prix Total</p>
+                                        <p> @Html.DisplayFor(modelItem => item.Total)</p>
+
+                                    </div>
+                                    <div class="col mb-3">
+                                        <p class="small text-muted mb-1">Qté Total</p>
+                                        <p> @Html.DisplayFor(modelItem => item.Qte)</p>
+
+                                    </div>
+                                </div>
+                                        @foreach (var k in y.Where(v => v.NumCommande == item.CommandeX))
+                                        {
+                                            <div class="mx-n5 px-5 py-4" style="background-color: #f2f2f2;">
+                                                <div class="row">
+                                                    <div class="col-md-6 col-lg-6">
+                                                        <p>@données.FindAsync(k.produit).Result.Title</p>
+                                                    </div>
+                                                    <div class="col-md-3 col-lg-3">
+                                                        <p>@k.NombreArticles</p>
+                                                    </div>
+                                                    <div class="col-md-3 col-lg-3">
+                                                        <p>@données.FindAsync(k.produit).Result.Price</p>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        }
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+
+                                                <div class="horizontal-timeline">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col mb-3">
+                                            <p class="small text-muted mb-1">Adresse:</p>
+                                            <p>@y.FirstOrDefault(x=>x.NumCommande==item.CommandeX).Adresse</p>
+                                        </div>
+
+                                        
+
+                                
+                                <a class="btn btn-outline-secondary" asp-action="Delete" asp-route-id="@item.LignepanierCommandeId">Delete</a>
+                                
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                Verification.Add(item.CommandeX);
+      
+            }
+ 
+
+        }
+     
+        
